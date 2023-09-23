@@ -1,4 +1,12 @@
-let peerConnection = new RTCPeerConnection()
+const servers = {
+    iceServers:[
+        {
+            urls:['stun.l.google.com:19302','stun1.l.google.com:19302',"stun2.l.google.com:19302"]
+        }
+    ]
+}
+
+let peerConnection = new RTCPeerConnection(servers);
 let localStream;
 let remoteStream;
 
@@ -14,7 +22,7 @@ let init = async () => {
 
     peerConnection.ontrack = (event) => {
         event.streams[0].getTracks().forEach((track) => {
-        remoteStream.addTrack(track);
+            remoteStream.addTrack(track);
         });
     };
 }
